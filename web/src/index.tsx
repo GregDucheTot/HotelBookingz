@@ -1,33 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Nav from "./components/Nav";
-import Main from "./components/Main";
-import Home from "./components/Home";
-import About from "./components/About";
+import Home from "./components/Pages/Home";
+import Book from "./components/Pages/Book";
+import About from "./components/Pages/About";
+import Offers from "./components/Pages/Offers";
+import Contact from "./components/Pages/Contact";
+import './styles/main.scss';
 
-function App() {
-    return (
-        <>
-            <div>
-                <Routes>
-                    <Route path='/' element={<Home/>} />
-                    <Route path='/about' element={<About/>} />
-                </Routes>
-            </div>
-        </>
-    )
-}
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root")
+    document.getElementById("root") || document.body
 );
 
 root.render(
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="about" element={<About />} />
-        </Routes>
+        <div className={'content'}>
+            <Routes>
+                <Route path='/' element={<Home/>} />
+                <Route path='/book' element={<Book/>} />
+                <Route path='/offers' element={<Offers/>} />
+                <Route path='/contact' element={<Contact/>} />
+                <Route path="/about" element={<About />} />
+            </Routes>
+        </div>
     </BrowserRouter>
 );

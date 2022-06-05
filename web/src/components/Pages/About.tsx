@@ -1,9 +1,9 @@
 import React from "react";
-import Nav from "./Nav";
+import Header from "../Header/Header";
 
 const About = () => {
     return <>
-        <Nav/>
+        <Header/>
         <p>HotelBookinz is a REACT app created on June 3rd by Grégoire Duché</p>
     </>;
 }
