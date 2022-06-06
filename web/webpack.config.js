@@ -56,5 +56,8 @@ module.exports = {
         static: path.join(__dirname, "build"),
         compress: true,
         port: 8080,
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
 };

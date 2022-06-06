@@ -7,6 +7,7 @@ import About from "./components/Pages/About";
 import Offers from "./components/Pages/Offers";
 import Contact from "./components/Pages/Contact";
 import './styles/main.scss';
+import Admin from "./components/Pages/Admin";
 
 
 const root = ReactDOM.createRoot(
@@ -22,6 +23,7 @@ root.render(
                 <Route path='/offers' element={<Offers/>} />
                 <Route path='/contact' element={<Contact/>} />
                 <Route path="/about" element={<About />} />
+                <Route path="/admin" element={<Admin />} />
             </Routes>
         </div>
     </BrowserRouter>
