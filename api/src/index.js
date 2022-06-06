@@ -3,41 +3,24 @@ const HotelRepository = require("./Hotels/HotelRepository");
 const cors = require('cors');
 const app = express();
 app.use(cors());
+app.use(express.json());
+
 const defaultPort = 9000;
-const mongoClient =  require('mongodb').MongoClient;
 
+app.get('/hotels', async (request, response) => {
+    const hotelrepo = new HotelRepository();
 
-const connect = () => {
-    return new Promise((resolve, reject) => {
-        console.log('prom');
-        mongoClient.connect('mongodb://127.0.0.1:27017/hotelbookingz', (err, db) => {
-            console.log('promcon');
-            if (err) {
-                reject(err);
-            }
-            resolve(db);
-        })
-    });
-
-};
-
-app.get('/status', (request, response) => {
-
-    connect().then((db) => {
-
-        db.close();
-    }, (err) => {
-        console.log(err)
-    });
-
-    response.json('ok')
-
+    response.json(await hotelrepo.read());
 });
 
-app.get('/hotels', (request, response) => {
-    connect();
-    const hotelrepo = new HotelRepository();
-    response.json(hotelrepo.read());
+app.post('/hotels', (request, response) => {
+    const hotelRepo = new HotelRepository();
+    try {
+        const success = hotelRepo.create(request.body);
+        response.json(success);
+    } catch (exception) {
+        response.json(exception);
+    }
 });
 
 app.get('/', (request, response) => {
