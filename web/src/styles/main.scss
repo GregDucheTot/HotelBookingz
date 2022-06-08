@@ -59,5 +59,10 @@ body {
         padding: 10px 15px;
       }
     }
+    .admin {
+      label, input, textarea {
+        display:block;
+      }
+    }
   }
 }

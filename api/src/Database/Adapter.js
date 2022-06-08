@@ -21,6 +21,18 @@ module.exports = class Adapter {
         return 'OK';
     }
 
+    async findOne(collection, filter, options = []) {
+        const db =  await this.connect();
+        const result = await db.collection(collection).findOne(filter, options);
+        return result;
+    }
+
+    async updateOne(collection, filter, update) {
+        const db = await this.connect();
+        const result = await db.collection(collection).findOneAndUpdate(filter, update);
+        return result;
+    }
+
     async findAll(collection) {
         let results = [];
         try {

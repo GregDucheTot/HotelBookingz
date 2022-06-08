@@ -1,10 +1,11 @@
 import React, {Component} from "react";
+import User from "../Auth/User";
 
-export default class CreateHotel extends Component {
+export default class CreateHotel extends Component<{}, { user: User}>{
     render()
     {
         return <>
-            <div>
+            <div className={'admin'}>
                 <label>Name:
                     <input type={'text'} name={'name'}/>
                 </label>
@@ -29,6 +30,7 @@ export default class CreateHotel extends Component {
                 <label>Cost per night:
                     <input type={'number'} name={'costPerNight'}/>
                 </label>
+                <input type={'submit'} name={'save'} value={'save'} />
             </div>
         </>;
     }

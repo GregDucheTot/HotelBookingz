@@ -1,16 +1,49 @@
 const express = require('express');
 const HotelRepository = require("./Hotels/HotelRepository");
+const Auth = require("./Auth/Auth");
 const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const defaultPort = 9000;
+const publicRoutes = [
+    '/auth/login',
+    '/hotels'
+];
+
+// Authentication middleware:
+app.use(async (request, response, next) => {
+    if (publicRoutes.indexOf(request.originalUrl) === -1) {
+        // verify token
+        const headers = request.headers;
+        const auth = new Auth();
+        try {
+            await auth.checkToken(headers['x-app-token']);
+            // no need to do anything on token success, just follow to next step
+        } catch (exception) {
+            return response.status(403).json({'status': exception});
+        }
+
+    }
+    next();
+}); // auth middleware
+
 
 app.get('/hotels', async (request, response) => {
     const hotelrepo = new HotelRepository();
-
     response.json(await hotelrepo.read());
+});
+
+app.get('/auth/login', async (request, response) => {
+    const auth = new Auth();
+    const user = await auth.login('admin', '137bb12fd34145204d1213c15512f244');
+    if (user) {
+        const token = await auth.getToken(user._id);
+        response.json({authToken: token});
+    } else {
+        response.status(403).json({status:'forbidden'});
+    }
 });
 
 app.post('/hotels', (request, response) => {
