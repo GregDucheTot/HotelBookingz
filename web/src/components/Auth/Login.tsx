@@ -3,19 +3,20 @@ import Header from "../Header/Header";
 import {Md5} from "ts-md5";
 import User from "./User";
 import {AuthRepository} from "../../Services/Auth/AuthRepository";
+import {Navigate} from "react-router-dom";
 
-export default class Login extends Component<{}, {user: User}> {
-     onLogin = async () => {
+export default class Login extends Component<{}, { user: User, loggedIn: boolean }> {
+
+    onLogin = async () => {
         const authRepo = AuthRepository.getInstance();
         const loggedIn = await authRepo.login(this.state?.user);
-        if (loggedIn) {
-            window.location.href = '/admin'; // @fixme: there is certainly a better wait to redirect with React?
-        } else {
+        this.setState({loggedIn: loggedIn});
+        if (!loggedIn) {
             alert('Your credentials are incorrect')
         }
     }
 
-    onChange = (event:ChangeEvent)  => { // @fixme: this type shows some conflicts in the IDE, so may have to double check this is the correct type
+    onChange = (event: ChangeEvent) => { // @fixme: this type shows some conflicts in the IDE, so may have to double check this is the correct type
         let user: User = this.state?.user || new User('');
 
         if (event.target.id === 'name') {
@@ -31,14 +32,18 @@ export default class Login extends Component<{}, {user: User}> {
         this.setState({user: user})
     }
 
-    render () {
+    render() {
+        const auth = AuthRepository.getInstance();
         return <>
-            <Header />
+            <Header/>
+            {this.state?.loggedIn &&
+                <Navigate replace to={'/admin'}/>
+            }
             <label>
                 <input type={'text'} id={'name'} placeholder={'Your username'} onChange={this.onChange}/>
             </label>
             <label>
-                <input type={'password'} id={'password'} placeholder={'Your password'}  onChange={this.onChange}/>
+                <input type={'password'} id={'password'} placeholder={'Your password'} onChange={this.onChange}/>
             </label>
             <button onClick={this.onLogin}>Log in</button>
         </>
