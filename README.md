@@ -13,4 +13,4 @@ run `docker -it {id} bash`
 run `mongo -u root -p` and enter `example` as password
 
 #TIME SPENT since June 3rd:
-5:25:41
+7:27:22
