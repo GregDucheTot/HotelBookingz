@@ -44,8 +44,13 @@ export class AuthRepository {
         return true;
     }
 
-    isLoggedIn() : boolean
-    {
+    isLoggedIn(): boolean {
         return typeof this.user?.token !== 'undefined';
+    }
+
+    augmentHeaders(headers: any) {
+        if (this.user?.token) {
+            headers["x-app-token"] = this.user.token;
+        }
     }
 }

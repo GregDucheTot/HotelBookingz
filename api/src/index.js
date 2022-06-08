@@ -24,7 +24,6 @@ app.use(async (request, response, next) => {
         } catch (exception) {
             return response.status(403).json({'status': exception});
         }
-
     }
     next();
 }); // auth middleware
