@@ -1,13 +1,12 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 export default class Login extends Component {
-    onLogin() {
-        alert('Click on login link !');
-    }
+
 
     render () {
         return <>
-            <a className={'login'} onClick={this.onLogin}>Login</a>
+            <Link to='/login' className={'login'}>Login</Link>
         </>;
     }
 }

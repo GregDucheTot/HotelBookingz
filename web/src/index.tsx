@@ -8,6 +8,7 @@ import Offers from "./components/Pages/Offers";
 import Contact from "./components/Pages/Contact";
 import './styles/main.scss';
 import Admin from "./components/Pages/Admin";
+import Login from "./components/Auth/Login";
 
 
 const root = ReactDOM.createRoot(
@@ -24,6 +25,7 @@ root.render(
                 <Route path='/contact' element={<Contact/>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </div>
     </BrowserRouter>
