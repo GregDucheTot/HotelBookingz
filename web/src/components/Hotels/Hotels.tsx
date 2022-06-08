@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Hotel as HotelModel} from "../../Hotels/Hotel";
-import {HotelRepository} from "../../Hotels/HotelRepository";
+import {Hotel as HotelModel} from "../../Services/Hotels/Hotel";
+import {HotelRepository} from "../../Services/Hotels/HotelRepository";
 export default class Hotels extends Component<{}, { hotels: HotelModel[] }> {
     getHotels() {
 

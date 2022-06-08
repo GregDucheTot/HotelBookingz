@@ -1,11 +1,16 @@
 export default class User {
     name: string;
-    token: string;
+    hash: string = '';
 
-    constructor(name: string, token?: string) {
+    /**
+     * The Auth token from the server
+     */
+    token: string = '';
+
+    constructor(name: string, hash?: string) {
         this.name = name;
-        if (token) {
-            this.token = token;
+        if (hash) {
+            this.hash = hash;
         }
     }
 }
