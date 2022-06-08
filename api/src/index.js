@@ -7,14 +7,14 @@ app.use(cors());
 app.use(express.json());
 
 const defaultPort = 9000;
-const publicRoutes = [
-    '/auth/login',
-    '/hotels'
-];
+const publicRoutes = {
+    '/auth/login' : ['POST'],
+    '/hotels': ['GET']
+};
 
 // Authentication middleware:
 app.use(async (request, response, next) => {
-    if (publicRoutes.indexOf(request.originalUrl) === -1) {
+    if (Object.keys(publicRoutes).indexOf(request.originalUrl) === -1 || publicRoutes[request.originalUrl].indexOf(request.method) === -1) {
         // verify token
         const headers = request.headers;
         const auth = new Auth();

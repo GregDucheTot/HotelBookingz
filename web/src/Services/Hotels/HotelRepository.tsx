@@ -4,6 +4,20 @@ import {response} from "express";
 export class HotelRepository {
     serviceUrl: string = 'http://localhost:9000/hotels';
 
+    async createHotel(hotel: Hotel) {
+        const results = await fetch(this.serviceUrl, {
+            method: 'POST',
+            body: JSON.stringify(hotel),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+
+
+        console.log('RESULTS', results);
+    }
+
     async getHotels() {
         let hotels: Hotel[] = [];
         try {

@@ -3,7 +3,6 @@ import {Hotel as HotelModel} from "../../Services/Hotels/Hotel";
 import {HotelRepository} from "../../Services/Hotels/HotelRepository";
 export default class Hotels extends Component<{}, { hotels: HotelModel[] }> {
     getHotels() {
-
         const hotelRepository = new HotelRepository();
         hotelRepository.getHotels().then((listOfHotels) => {
             this.setState({
