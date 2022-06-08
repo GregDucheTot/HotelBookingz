@@ -23,7 +23,7 @@ module.exports = class Auth {
         const dbToken  = await this.adapter.findOne(this.token_collection, {
             uid: userId
         }, {
-            updatedAt: { $lte: date - 30} // token valid only for 30s
+            updatedAt: { $gte: date - 30} // token valid only for 30s
         });
 
         if (dbToken) {
@@ -56,7 +56,7 @@ module.exports = class Auth {
         const dbToken  = await this.adapter.findOne(this.token_collection, {
             token: token
         }, {
-            updatedAt: { $lte: date - 30} // token valid only for 30s
+            updatedAt: { $gte: date - 30} // token valid only for 30s
         });
 
         if (dbToken) {

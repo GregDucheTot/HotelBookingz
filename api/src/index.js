@@ -35,9 +35,9 @@ app.get('/hotels', async (request, response) => {
     response.json(await hotelrepo.read());
 });
 
-app.get('/auth/login', async (request, response) => {
+app.post('/auth/login', async (request, response) => {
     const auth = new Auth();
-    const user = await auth.login('admin', '137bb12fd34145204d1213c15512f244');
+    const user = await auth.login(request.body.user, request.body.password); // @fixme: move this to Authorization header.
     if (user) {
         const token = await auth.getToken(user._id);
         response.json({authToken: token});
