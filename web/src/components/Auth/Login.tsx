@@ -33,7 +33,6 @@ export default class Login extends Component<{}, { user: User, loggedIn: boolean
     }
 
     render() {
-        const auth = AuthRepository.getInstance();
         return <>
             <Header/>
             {this.state?.loggedIn &&
