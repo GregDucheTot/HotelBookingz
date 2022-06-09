@@ -33,6 +33,16 @@ module.exports = class Adapter {
         return result;
     }
 
+    async aggregate(collection, pipeline) {
+        try {
+            const db = await this.connect();
+            const results = await db.collection(collection).aggregate(pipeline);
+            return results.toArray();
+        } catch (exception) {
+            // @todo
+        }
+    }
+
     async findAll(collection) {
         let results = [];
         try {

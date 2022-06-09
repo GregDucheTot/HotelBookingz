@@ -15,14 +15,28 @@ module.exports = class HotelRepository {
 
     async read() {
         let results = [];
-        const data = await this.adapter.findAll(this.collection);
+
+        // Sort hotel by revenu to show the best available price first
+        const data = await this.adapter.aggregate(this.collection, [
+            {
+                $project: {
+                    revenue: {$subtract:['$pricing.perNight', '$pricing.costPerNight']},
+                    _id: '$_id',
+                    name: '$name',
+                    image: '$image',
+                    country:'$country',
+                    pricing: '$pricing'
+                }
+            }, {
+                $sort: {
+                    revenue: -1
+                }
+            }
+        ]);
         for (let hotel of data) {
             const objHotel  =new Hotel(hotel);
-            console.log(objHotel.pricing);
             results.push(objHotel);
-
         }
-
         return results;
     }
 }
