@@ -9,19 +9,19 @@ module.exports = class HotelRepository {
     }
 
     create(hotelData) {
-        // @fixme: add validation on hotel Data
-        return this.adapter.insert(this.collection, {
-            name: hotelData['name'],
-            description: hotelData['description'],
-            image: hotelData['image'],
-            country: hotelData['country'],
-            pricing: {
-                perNight: parseInt(hotelData.pricing?.perNight)|| 0,
-                perWeek: parseInt(hotelData.pricing?.perWeek) || 0,
-                costPerNight: parseInt(hotelData.pricing?.costPerNight) || 0,
-            }
-
-        });
+        if (hotelData && hotelData['name']) {
+            return this.adapter.insert(this.collection, {
+                name: hotelData['name'],
+                description: hotelData['description'],
+                image: hotelData['image'],
+                country: hotelData['country'],
+                pricing: {
+                    perNight: parseInt(hotelData.pricing?.perNight) || 0,
+                    perWeek: parseInt(hotelData.pricing?.perWeek) || 0,
+                    costPerNight: parseInt(hotelData.pricing?.costPerNight) || 0,
+                }
+            });
+        }
     }
 
     async read() {
