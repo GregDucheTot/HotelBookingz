@@ -18,7 +18,7 @@ export default class Contact extends Component{
                     <label>Your message:
                         <textarea></textarea>
                     </label>
-                    <button type={'submit'} />
+                    <button type={'submit'}>Send</button>
                 </form>
             </div>
         </>;

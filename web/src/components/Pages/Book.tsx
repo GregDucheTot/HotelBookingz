@@ -5,7 +5,7 @@ export default class Book extends Component{
     render() {
         return <>
             <Header/>
-            <p>Book</p>
+            <p>Book a room - not implemented yet :)</p>
         </>;
     }
 }

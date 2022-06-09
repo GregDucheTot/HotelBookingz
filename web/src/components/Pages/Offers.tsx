@@ -5,7 +5,7 @@ export default class Offers extends Component{
     render() {
         return <>
             <Header/>
-            <p>Offers</p>
+            <p>See our offers - Not implemented yet :)</p>
         </>;
     }
 }
