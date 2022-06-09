@@ -17,12 +17,12 @@ module.exports = class HotelRepository {
         let results = [];
         const data = await this.adapter.findAll(this.collection);
         for (let hotel of data) {
-            results.push(new Hotel(hotel));
+            const objHotel  =new Hotel(hotel);
+            console.log(objHotel.pricing);
+            results.push(objHotel);
+
         }
 
         return results;
     }
-
-    update() {}
-    delete() {}
 }

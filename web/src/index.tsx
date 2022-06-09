@@ -10,7 +10,6 @@ import './styles/main.scss';
 import Admin from "./components/Pages/Admin";
 import Login from "./components/Auth/Login";
 
-
 const root = ReactDOM.createRoot(
     document.getElementById("root") || document.body
 );

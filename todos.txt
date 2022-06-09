@@ -1,6 +1,10 @@
 1. finish the hotel creation
     - add image upload
     - add pricing
+    ==> 30min
 2. sort the home feed by margin
+    => 30min
 3. create search mechanism
+    => 30min
 4. make it look nicer.
+    => 1hour

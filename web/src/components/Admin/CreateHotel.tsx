@@ -15,6 +15,21 @@ export default class CreateHotel extends Component<{}, { user: User, hotel: Hote
         });
     }
 
+    loadImage = (e: ChangeEvent) => {
+        const input: HTMLInputElement = e.target;
+        if (input && input.files) {
+            if (!input.files[0].type.match('image.*')) {
+                throw 'Not an image';
+            }
+            const reader = new FileReader();
+            reader.onload = () => {
+                const hotel = this.state?.hotel || new Hotel({});
+                hotel.setAttribute('image', reader.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     save = () => {
         const hotelRepository = new HotelRepository();
         hotelRepository.createHotel(this.state?.hotel)
@@ -31,7 +46,7 @@ export default class CreateHotel extends Component<{}, { user: User, hotel: Hote
                     <textarea id={'description'} onChange={this.onChange}/>
                 </label>
                 <label>Image:
-                    <input type={'text'} id={'image'} onChange={this.onChange}/>
+                    <input type={'file'} id={'image'} onChange={this.loadImage}  accept={'.jpg,.png'}/>
                 </label>
                 <label>Country:
                     <input type={'text'} id={'country'} onChange={this.onChange}/>
@@ -39,15 +54,18 @@ export default class CreateHotel extends Component<{}, { user: User, hotel: Hote
                 <label>City:
                     <input type={'text'} id={'city'} onChange={this.onChange}/>
                 </label>
-                <label>Price per night:
-                    <input type={'number'} id={'perNight'} onChange={this.onChange}/>
-                </label>
-                <label>Price per week:
-                    <input type={'number'} id={'perWeek'} onChange={this.onChange}/>
-                </label>
-                <label>Cost per night:
-                    <input type={'number'} id={'costPerNight'} onChange={this.onChange}/>
-                </label>
+                <fieldset>
+                    <legend>Price:</legend>
+                    <label>Price per night:
+                        <input type={'number'} id={'perNight'} onChange={this.onChange}/>
+                    </label>
+                    <label>Price per week:
+                        <input type={'number'} id={'perWeek'} onChange={this.onChange}/>
+                    </label>
+                    <label>Cost per night:
+                        <input type={'number'} id={'costPerNight'} onChange={this.onChange}/>
+                    </label>
+                </fieldset>
                 <button type={'submit'} name={'save'} onClick={this.save}>Save</button>
             </div>
         </>;

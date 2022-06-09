@@ -16,7 +16,7 @@ export class Hotel {
         this.country = dbData['country'];
         this.city = dbData['city'];
         this.description = dbData['description'];
-        this.pricing = new Pricing(dbData['perNight'], dbData['perWeek'], dbData['costPerNight']);
+        this.pricing = new Pricing(dbData['pricing']?.['perNight'], dbData['pricing']?.['perWeek'], dbData['pricing']?.['costPerNight']);
     }
 
     setAttribute(field: string, value: any) {
@@ -36,9 +36,11 @@ export class Hotel {
             case 'description':
                 this.country = value;
                 break;
-
-                // @todo: pricing
-
+            case 'perNight':
+            case 'perWeek':
+            case 'costPerNight':
+                const pricing = this.pricing || new Pricing();
+                this.pricing[field] = value;
         }
     }
 }

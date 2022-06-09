@@ -1,7 +1,7 @@
 export class Pricing {
-    perNight: number;
-    perWeek: number;
-    costPerNight: number;
+    perNight: number = 0;
+    perWeek: number = 0;
+    costPerNight: number = 0;
 
     /**
      *
@@ -9,7 +9,7 @@ export class Pricing {
      * @param perWeek
      * @param costPerNight
      */
-    constructor(perNight: number, perWeek:number, costPerNight:number) {
+    constructor(perNight: number = 0, perWeek:number = 0, costPerNight:number = 0) {
         this.perNight = perNight;
         this.perWeek = perWeek;
         this.costPerNight = costPerNight;

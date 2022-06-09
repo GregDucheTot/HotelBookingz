@@ -4,8 +4,7 @@ const Auth = require("./Auth/Auth");
 const cors = require('cors');
 const app = express();
 app.use(cors());
-app.use(express.json());
-
+app.use(express.json({limit: '5mb'}));
 const defaultPort = 9000;
 const publicRoutes = {
     '/auth/login' : ['POST'],
@@ -26,12 +25,6 @@ app.use(async (request, response, next) => {
         }
     }
     next();
-}); // auth middleware
-
-
-app.get('/hotels', async (request, response) => {
-    const hotelrepo = new HotelRepository();
-    response.json(await hotelrepo.read());
 });
 
 app.post('/auth/login', async (request, response) => {
@@ -45,6 +38,11 @@ app.post('/auth/login', async (request, response) => {
     }
 });
 
+app.get('/hotels', async (request, response) => {
+    const hotelrepo = new HotelRepository();
+    response.json(await hotelrepo.read());
+});
+
 app.post('/hotels', (request, response) => {
     const hotelRepo = new HotelRepository();
     try {
@@ -53,12 +51,6 @@ app.post('/hotels', (request, response) => {
     } catch (exception) {
         response.json(exception);
     }
-});
-
-app.get('/', (request, response) => {
-    const hotelrepo = new HotelRepository();
-    response.send('Hello, world');
-    console.log(hotelrepo.read())
 });
 
 app.listen(defaultPort, () => {
